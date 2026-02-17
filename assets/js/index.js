@@ -260,35 +260,72 @@
 
 // function debounce(fn, delay) {
 //   let timer = 0;
-//   return function () {
-//     let context = this,
-//       args = arguments;
+//   return function (...args) {
 //     clearTimeout(timer);
 //     timer = setTimeout(() => {
-//       fn.apply(context, args);
+//       fn.apply(this, ...args);
 //     }, delay);
 //   };
 // }
 
 // // =================================== Throttling ===================================
 
-document
-  .querySelector("body")
-  .addEventListener("resize", throttle(handleResize, 1000));
+// const div = document.querySelector("div");
 
-function handleResize(e) {
-  console.log(e.target.offsetWidth);
-}
+// const observer = new ResizeObserver(
+//   throttle((entries) => {
+//     for (let entry of entries) {
+//       console.log(entry.target.offsetWidth);
+//     }
+//   }, 1000),
+// );
 
-function throttle(fn, delay) {
-  let lastCall = 0;
+// observer.observe(div);
 
-  return function () {
-    const now = Date.now();
+// function throttle(fn, delay) {
+//   let lastCall = 0;
 
-    if (now - lastCall >= delay) {
-      lastCall = now;
-      fn.apply(this, arguments);
-    }
+//   return function (...args) {
+//     const now = Date.now();
+
+//     if (now - lastCall >= delay) {
+//       lastCall = now;
+//       fn.apply(this, args);
+//     }
+//   };
+// }
+
+// // =================================== async / await ===================================
+
+// (async function () {
+//   console.log("start");
+
+//   await new Promise((resolve) => setTimeout(resolve, 1000));
+
+//   for (let i = 1; i < 6; i++) {
+//     console.log(i);
+//   }
+
+//   console.log("end");
+// })();
+
+// // =================================== Module Pattern ===================================
+
+function modulePattern() {
+  const var1 = 123;
+  const greet = function () {
+    return `Hello ${var1}!!`;
+  };
+  return {
+    sayHi: () => {
+      console.log("Greetings.");
+      greet();
+    },
   };
 }
+
+const obj1 = modulePattern();
+const obj2 = modulePattern();
+console.log(obj1.sayHi === obj2.sayHi);
+
+// // =================================== Singleton Pattern ===================================

@@ -272,23 +272,68 @@
 
 // // =================================== Throttling ===================================
 
-document
-  .querySelector("body")
-  .addEventListener("resize", throttle(handleResize, 1000));
+// document
+//   .querySelector("body")
+//   .addEventListener("resize", throttle(handleResize, 1000));
 
-function handleResize(e) {
-  console.log(e.target.offsetWidth);
+// function handleResize(e) {
+//   console.log(e.target.offsetWidth);
+// }
+
+// function throttle(fn, delay) {
+//   let lastCall = 0;
+
+//   return function () {
+//     const now = Date.now();
+
+//     if (now - lastCall >= delay) {
+//       lastCall = now;
+//       fn.apply(this, arguments);
+//     }
+//   };
+// }
+
+// // =================================== Factory Function ===================================
+
+// function getUniqueId(prefix) {
+//   let id = 0;
+//   return function () {
+//     return `${prefix}${++id}`;
+//   };
+// }
+
+// function getUniqueId(prefix) {
+//   let id = 0;
+//   return {
+//     getId: function () {
+//       return `${prefix}${++id}`;
+//     },
+//     resetId: function () {
+//       id = 0;
+//     },
+//   };
+// }
+
+// const getBookId = getUniqueId("book_");
+// const getUserId = getUniqueId("user_");
+
+// function getExponentValue(exponent) {
+//   return function (value) {
+//     return value ** exponent;
+//   };
+// }
+
+// const square = getExponentValue(2);
+// const cube = getExponentValue(3);
+
+function countClick(id) {
+  var count = 0;
+  const btn = document.getElementById(id);
+  btn.addEventListener("click", () => {
+    btn.innerText = ++count;
+  });
 }
 
-function throttle(fn, delay) {
-  let lastCall = 0;
-
-  return function () {
-    const now = Date.now();
-
-    if (now - lastCall >= delay) {
-      lastCall = now;
-      fn.apply(this, arguments);
-    }
-  };
-}
+countClick("btn1");
+countClick("btn2");
+countClick("btn3");

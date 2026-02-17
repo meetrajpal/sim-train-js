@@ -295,6 +295,51 @@
 //   };
 // }
 
+// // =================================== Factory Function ===================================
+
+// function getUniqueId(prefix) {
+//   let id = 0;
+//   return function () {
+//     return `${prefix}${++id}`;
+//   };
+// }
+
+// function getUniqueId(prefix) {
+//   let id = 0;
+//   return {
+//     getId: function () {
+//       return `${prefix}${++id}`;
+//     },
+//     resetId: function () {
+//       id = 0;
+//     },
+//   };
+// }
+
+// const getBookId = getUniqueId("book_");
+// const getUserId = getUniqueId("user_");
+
+// function getExponentValue(exponent) {
+//   return function (value) {
+//     return value ** exponent;
+//   };
+// }
+
+// const square = getExponentValue(2);
+// const cube = getExponentValue(3);
+
+// function countClick(id) {
+//   var count = 0;
+//   const btn = document.getElementById(id);
+//   btn.addEventListener("click", () => {
+//     btn.innerText = ++count;
+//   });
+// }
+
+// countClick("btn1");
+// countClick("btn2");
+// countClick("btn3");
+
 // // =================================== async / await ===================================
 
 // (async function () {

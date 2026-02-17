@@ -42,7 +42,7 @@
 
 // fn2();
 
-// // =================================== Functions ===================================
+// // ================================== Functions ===================================
 
 // // function statement AKA function declaration
 // function fn1() {
@@ -78,7 +78,7 @@
 
 // document.getElementById("code").innerText = fn1() + fn2() + fn3() + fn4();
 
-// // =================================== Reduce ===================================
+// // =================================== Reduce =====================================
 // const arr = [45, 78, 65, 12, 32, 5];
 
 // document.getElementById("code").innerText = arr
@@ -135,7 +135,7 @@
 //   }, [])
 //   .toString();
 
-// // =================================== Arrow functions with this keyword ===================================
+// // ======================= Arrow functions with this keyword ======================
 
 // class Car {
 //   constructor(name) {
@@ -160,7 +160,7 @@
 // let car1 = new Car("BMW");
 // car1.printName();
 
-// // =================================== Prototypes ===================================
+// // ================================== Prototypes ==================================
 
 // function Car(name) {
 //   this.name = name;
@@ -190,7 +190,7 @@
 // console.log(car3);
 // console.log(car4);
 
-// // =================================== Promise Chaining ===================================
+// // =============================== Promise Chaining ===============================
 
 // fetch("https://jsonplaceholder.typicode.com/users")
 //   .then((response) => {
@@ -208,7 +208,7 @@
 //     console.log(err);
 //   });
 
-// // =================================== Promise.all ===================================
+// // ================================== Promise.all =================================
 
 // const lots0fFetchCalls = [
 //   fetch("${BASE_URL}/1"),
@@ -229,7 +229,7 @@
 //     console.log(e);
 //   });
 
-// // =================================== Promise.allSettled ===================================
+// // ============================== Promise.allSettled ==============================
 
 // async function allSettledDemo() {
 //   const GITHUB_BASE_URL = "https://api.github.com";
@@ -248,7 +248,7 @@
 //   console.log(results);
 // }
 
-// // =================================== Debouncing ===================================
+// // ================================== Debouncing ==================================
 
 // document
 //   .getElementById("searchBox")
@@ -263,12 +263,12 @@
 //   return function (...args) {
 //     clearTimeout(timer);
 //     timer = setTimeout(() => {
-//       fn.apply(this, ...args);
+//       fn.apply(this, [...args]);
 //     }, delay);
 //   };
 // }
 
-// // =================================== Throttling ===================================
+// // ================================== Throttling ==================================
 
 // const div = document.querySelector("div");
 
@@ -290,12 +290,12 @@
 
 //     if (now - lastCall >= delay) {
 //       lastCall = now;
-//       fn.apply(this, args);
+//       fn.apply(this, [...args]);
 //     }
 //   };
 // }
 
-// // =================================== Factory Function ===================================
+// // =============================== Factory Function ===============================
 
 // function getUniqueId(prefix) {
 //   let id = 0;
@@ -340,7 +340,7 @@
 // countClick("btn2");
 // countClick("btn3");
 
-// // =================================== async / await ===================================
+// // =================== async / await blocking current execution ===================
 
 // (async function () {
 //   console.log("start");
@@ -354,23 +354,87 @@
 //   console.log("end");
 // })();
 
-// // =================================== Module Pattern ===================================
+// // ================================ Module Pattern ================================
 
-function modulePattern() {
-  const var1 = 123;
-  const greet = function () {
-    return `Hello ${var1}!!`;
-  };
-  return {
-    sayHi: () => {
-      console.log("Greetings.");
-      greet();
-    },
-  };
-}
+// const ModulePattern = (() => {
+//   const var1 = 123;
+//   const greet = function () {
+//     return `Hello ${var1}!!`;
+//   };
+//   return {
+//     sayHi: () => {
+//       console.log("Greetings.");
+//       greet();
+//     },
+//   };
+// })();
 
-const obj1 = modulePattern();
-const obj2 = modulePattern();
-console.log(obj1.sayHi === obj2.sayHi);
+// // =============================== Singleton Pattern ==============================
 
-// // =================================== Singleton Pattern ===================================
+// const SingletonPattern = (() => {
+//   let instance;
+//   const createInstance = () => ({
+//     dbCon: "abc",
+//   });
+//   return {
+//     getInstance: () => {
+//       if (!instance) {
+//         instance = createInstance();
+//       }
+//       return instance;
+//     },
+//   };
+// })();
+
+// // =============================== Observer Pattern ===============================
+
+// class Subject {
+//   constructor() {
+//     this.observers = [];
+//   }
+
+//   subscribe(fn) {
+//     this.observers.push(fn);
+//   }
+
+//   unsubscribe(fn) {
+//     this.observers = this.observers.filter((x) => x !== fn);
+//   }
+
+//   publish(post) {
+//     this.observers.forEach((fn) => fn(post));
+//   }
+// }
+
+// function observer1(value) {
+//   console.log(`Observer 1: ${value}`);
+// }
+
+// function observer2(value) {
+//   console.log(`Observer 2: ${value}`);
+// }
+
+// const subject = new Subject();
+// subject.subscribe(observer1);
+// subject.subscribe(observer2);
+
+// subject.publish("New Post Blog!");
+
+// // ============================== call / apply / bind =============================
+
+// const person1 = {
+//   fname: "Vraj",
+//   greet: function (greetType) {
+//     console.log(`${this.fname} greets you with ${greetType}.`);
+//   },
+// };
+
+// const person2 = {
+//   fname: "Sujal",
+// };
+
+// person1.greet("Namaste");
+
+// person1.greet.call(person2, "Hello");
+// person1.greet.apply(person2, ["Hey"]);
+// person1.greet.bind(person2)("Hii");
